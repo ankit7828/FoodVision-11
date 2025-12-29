@@ -45,18 +45,47 @@ These datasets are preprocessed and merged to build a reliable recommendation sy
 
 # Architechture
 
-User Image
-   ↓
-Image Preprocessing
-   ↓
-MobileNeet (Feature Extraction)
-   ↓
-Attention / Transformer Layer
-   ↓
-Fully Connected Layer
-   ↓
-Softmax Output (11 Classes)
-   ↓
-Predicted Food Label
+User Image  
+
+   ↓  
+   
+Image Preprocessing  
+
+   ↓  
+   
+MobileNeet (Feature Extraction)  
+
+   ↓  
+   
+Attention / Transformer Layer  
+
+   ↓  
+   
+Fully Connected Layer  
+
+   ↓  
+   
+Softmax Output (11 Classes)  
+
+   ↓  
+   
+Predicted Food Label  
+
+# Technology Stack
+## 1. Backend
+Python , Flask , NumPy , Pandas , Mobilenet , Transfer Learning , CNN
+
+## 2. Frontend
+HTML , CSS , JavaScript
+
+# Key Features
+User-friendly web interface , Fast classification generation , Accurate 
+
+<img width="1920" height="1080" alt="Screenshot 2025-12-29 184731" src="https://github.com/user-attachments/assets/27b81c5f-f0a2-4321-b788-6e25f355c6b5" />
+
+
+<img width="1920" height="1080" alt="Screenshot 2025-12-29 184742" src="https://github.com/user-attachments/assets/f3c7c496-0055-46a6-a954-5cf3d7d50146" />
+
+
 
 
