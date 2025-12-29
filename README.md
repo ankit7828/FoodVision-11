@@ -10,8 +10,11 @@ The objective of this project is to develop an accurate and efficient deep-learn
 
 # Model Performance
 
-The Food-11 classifier was trained using Transfer Learning with MobileNetV2.
-Training Accuracy: 89%
-Test Accuracy: 81%
+The Food-11 classifier was trained using Transfer Learning with MobileNetV2.  
+
+Training Accuracy: 89%  
+
+Test Accuracy: 81%  
+
 
 These results show that the model generalizes well to unseen data while staying lightweight and efficient. Fine-tuning, data augmentation, and a reduced learning rate helped improve performance and reduce overfitting.
