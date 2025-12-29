@@ -21,7 +21,8 @@ These results show that the model generalizes well to unseen data while staying 
 
 # Installation and Setup
 ## 1. Clone the repository
-git clone https://github.com/ankit7828/Food_11_Image_Classifier
+git clone https://github.com/ankit7828/Food_11_Image_Classifier  
+
 cd Food_11_Image_Classifier  
 
 ## 2. Install the dependencies
