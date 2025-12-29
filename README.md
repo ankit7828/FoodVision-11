@@ -18,3 +18,39 @@ Test Accuracy: 81%
 
 
 These results show that the model generalizes well to unseen data while staying lightweight and efficient. Fine-tuning, data augmentation, and a reduced learning rate helped improve performance and reduce overfitting.
+
+# Installation and Setup
+## 1. Clone the repository
+git clone https://github.com/ankit7828/Food_11_Image_Classifier
+cd Food_11_Image_Classifier  
+
+## 2. Install the dependencies
+pip install -r requirements.txt
+
+## 3. Run the Flask app
+python app.py
+
+## 4. Open in browser
+http://127.0.0.1:5000/
+
+# Datasets Used
+## Food11
+### 1. Train
+### 2. Test
+both with 11 categories
+
+food-101/
+ ├── images/
+ │    ├── pizza/
+ │    ├── burger/
+ │    ├── sushi/
+ │    └── ...
+ ├── meta/
+ │    ├── train.txt
+ │    └── test.txt
+
+
+Dataset link: https://www.kaggle.com/datasets/imbikramsaha/food11 
+These datasets are preprocessed and merged to build a reliable recommendation system.
+
+
