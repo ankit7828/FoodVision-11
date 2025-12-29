@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Food Classifier</title>
+
+<style>
+    :root{
+        --primary:#6C63FF;
+        --bg:#0f1220;
+        --card:#151a2c;
+        --text:#e9ecff;
+        --soft:#9aa0c8;
+    }
+
+    *{
+        box-sizing:border-box;
+    }
+
+    body{
+        margin:0;
+        font-family: "Poppins", Arial, sans-serif;
+        background: radial-gradient(circle at top, #20264a, #0f1220);
+        color:var(--text);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        min-height:100vh;
+        padding:20px;
+    }
+
+    .container{
+        background:linear-gradient(180deg,#161b2f,#0f1323);
+        border:1px solid rgba(255,255,255,0.08);
+        border-radius:22px;
+        padding:28px 30px 34px;
+        max-width:650px;
+        width:100%;
+        box-shadow:0 20px 40px rgba(0,0,0,.35);
+    }
+
+    h2{
+        margin-top:0;
+        letter-spacing:.5px;
+        text-align:center;
+        font-weight:700;
+    }
+
+    .upload-box{
+        border:2px dashed rgba(255,255,255,.18);
+        padding:26px;
+        text-align:center;
+        border-radius:16px;
+        cursor:pointer;
+        transition:.25s;
+        margin-top:16px;
+    }
+    .upload-box:hover{
+        border-color:var(--primary);
+        background:#14182b;
+    }
+
+    input[type=file]{ display:none; }
+
+    .btn{
+        margin-top:16px;
+        width:100%;
+        padding:12px;
+        border-radius:10px;
+        border:none;
+        cursor:pointer;
+        background:var(--primary);
+        color:white;
+        font-size:15px;
+        font-weight:600;
+        transition: .25s;
+    }
+    .btn:hover{ filter:brightness(1.1); }
+
+    .preview{ margin-top:18px; text-align:center; }
+    .preview img{
+        width:280px;
+        border-radius:14px;
+        box-shadow:0 14px 40px rgba(0,0,0,.35);
+    }
+
+    .prediction{
+        margin-top:20px;
+        font-size:22px;
+        text-align:center;
+        font-weight:700;
+        color:#a8ffb3;
+    }
+
+    small{ color:var(--soft); display:block; margin-top:6px; }
+
+    /* CATEGORY SECTION */
+    .category-box{
+        margin-top:26px;
+        background:#12172b;
+        border-radius:16px;
+        padding:18px 20px 14px;
+        border:1px solid rgba(255,255,255,.08);
+    }
+
+    .category-title{
+        font-size:15px;
+        font-weight:700;
+        margin-bottom:10px;
+        color:#c9d4ff;
+    }
+
+    .category-grid{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap:10px 12px;
+        font-size:14px;
+    }
+
+    .chip{
+        background:#1b2240;
+        border:1px solid rgba(255,255,255,.1);
+        padding:8px 10px;
+        border-radius:10px;
+        display:flex;
+        align-items:center;
+        gap:6px;
+        color:#e9ecff;
+    }
+
+    .chip span{
+        background:#2b3568;
+        padding:4px 7px;
+        border-radius:8px;
+        font-size:11px;
+    }
+</style>
+
+<script>
+    function chooseFile(){
+        document.getElementById("fileInput").click();
+    }
+
+    function showPreview(event){
+        if(event.target.files.length>0){
+            const src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById("previewImage").src = src;
+            document.getElementById("previewWrapper").style.display = "block";
+        }
+    }
+</script>
+
+</head>
+
+<body>
+<div class="container">
+
+    <h2>🍽️ AI Food Image Classifier</h2>
+    <small>Upload an image — the model will recognize the food</small>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box" onclick="chooseFile()">
+            <strong>Click to upload</strong><br>
+            <small>(jpg, png, jpeg)</small>
+        </div>
+
+        <input id="fileInput" type="file" name="image" accept="image/*" onchange="showPreview(event)" required>
+
+        <div id="previewWrapper" class="preview" style="display:none;">
+            <img id="previewImage" />
+        </div>
+
+        <button class="btn" type="submit">🔍 Predict Food</button>
+
+    </form>
+
+    {% if image_path %}
+        <div class="preview">
+            <img src="{{ image_path }}" alt="Uploaded Image">
+        </div>
+    {% endif %}
+
+    {% if prediction %}
+        <div class="prediction">
+            Prediction: {{ prediction }}
+        </div>
+    {% endif %}
+
+    <!-- CATEGORY SECTION -->
+    <div class="category-box">
+        <div class="category-title">
+            🍱 Categories this model understands
+        </div>
+
+        <div class="category-grid">
+
+            <div class="chip"><span>🍎</span> apple pie</div>
+            <div class="chip"><span🍰</span> cheesecake</div>
+
+            <div class="chip"><span>🍛</span> chicken curry</div>
+            <div class="chip"><span>🍟</span> french fries</div>
+
+            <div class="chip"><span>🍚</span> fried rice</div>
+            <div class="chip"><span>🍔</span> hamburger</div>
+
+            <div class="chip"><span>🌭</span> hot dog</div>
+            <div class="chip"><span>🍨</span> ice cream</div>
+
+            <div class="chip"><span>🍳</span> omelette</div>
+            <div class="chip"><span>🍕</span> pizza</div>
+
+            <div class="chip"><span>🍣</span> sushi</div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
