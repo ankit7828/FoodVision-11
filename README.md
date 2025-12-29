@@ -39,18 +39,24 @@ http://127.0.0.1:5000/
 ### 2. Test
 both with 11 categories
 
-food-101/
- ├── images/
- │    ├── pizza/
- │    ├── burger/
- │    ├── sushi/
- │    └── ...
- ├── meta/
- │    ├── train.txt
- │    └── test.txt
-
 
 Dataset link: https://www.kaggle.com/datasets/imbikramsaha/food11 
 These datasets are preprocessed and merged to build a reliable recommendation system.
+
+# Architechture
+
+User Image
+   ↓
+Image Preprocessing
+   ↓
+MobileNeet (Feature Extraction)
+   ↓
+Attention / Transformer Layer
+   ↓
+Fully Connected Layer
+   ↓
+Softmax Output (11 Classes)
+   ↓
+Predicted Food Label
 
 
