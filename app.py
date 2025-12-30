@@ -5,7 +5,6 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import keras
 
-# ---- LOAD MODEL (SavedModel via TFSMLayer) ----
 MODEL_PATH = "food11_best"
 
 base = keras.layers.TFSMLayer(MODEL_PATH, call_endpoint="serving_default")
@@ -14,7 +13,6 @@ inputs = keras.Input(shape=(224, 224, 3), dtype="float32")
 outputs = base(inputs)
 model = keras.Model(inputs, outputs)
 
-# ---- CLASS NAMES ----
 CLASS_NAMES = [
     "apple_pie","cheesecake","chicken_curry","french_fries","fried_rice",
     "hamburger","hot_dog","ice_cream","omelette","pizza","sushi"
@@ -22,7 +20,6 @@ CLASS_NAMES = [
 
 app = Flask(__name__)
 
-# ---- IMAGE PREPROCESS ----
 def prepare_image(file):
     img = load_img(file, target_size=(224, 224))
     arr = img_to_array(img) / 255.0
@@ -33,36 +30,41 @@ def prepare_image(file):
 @app.route("/", methods=["GET", "POST"])
 def index():
     prediction = None
+    confidence = None
     uploaded_img = None
 
     if request.method == "POST":
-        if "image" not in request.files:
-            return render_template("index.html", prediction="No file uploaded")
+        file = request.files.get("image")
 
-        file = request.files["image"]
+        if not file or file.filename == "":
+            return render_template("index.html",
+                                   prediction="No file uploaded")
 
-        if file.filename == "":
-            return render_template("index.html", prediction="No file selected")
-
-        # Save uploaded image
         os.makedirs("static", exist_ok=True)
         img_path = os.path.join("static", file.filename)
         file.save(img_path)
 
         img = prepare_image(img_path)
 
-        # ---- PREDICT ----
         pred = model.predict(img)
 
-        # TFSMLayer outputs dict sometimes
         if isinstance(pred, dict):
             pred = list(pred.values())[0]
 
+        # ---- GET PREDICTION + CONFIDENCE ----
         pred_idx = np.argmax(pred, axis=1)[0]
         prediction = CLASS_NAMES[pred_idx]
+
+        confidence = float(np.max(pred)) * 100
+
         uploaded_img = img_path
 
-    return render_template("index.html", prediction=prediction, image_path=uploaded_img)
+    return render_template(
+        "index.html",
+        prediction=prediction,
+        confidence=confidence,
+        image_path=uploaded_img
+    )
 
 
 if __name__ == "__main__":
