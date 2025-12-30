@@ -56,6 +56,7 @@
         transition:.25s;
         margin-top:16px;
     }
+
     .upload-box:hover{
         border-color:var(--primary);
         background:#14182b;
@@ -76,6 +77,7 @@
         font-weight:600;
         transition: .25s;
     }
+
     .btn:hover{ filter:brightness(1.1); }
 
     .preview{ margin-top:18px; text-align:center; }
@@ -94,6 +96,30 @@
     }
 
     small{ color:var(--soft); display:block; margin-top:6px; }
+
+    /* CONFIDENCE STYLES */
+    .confidence{
+        text-align:center;
+        margin-top:8px;
+        font-size:16px;
+        color:#8ef5a3;
+        font-weight:600;
+    }
+
+    .bar-wrapper{
+        width:100%;
+        height:12px;
+        border-radius:10px;
+        background:#1b2240;
+        margin-top:6px;
+        overflow:hidden;
+    }
+
+    .bar{
+        height:100%;
+        background:linear-gradient(90deg,#4ade80,#22c55e);
+        border-radius:10px;
+    }
 
     /* CATEGORY SECTION */
     .category-box{
@@ -186,9 +212,18 @@
         <div class="prediction">
             Prediction: {{ prediction }}
         </div>
+
+        {% if confidence %}
+            <div class="confidence">
+                Confidence: {{ "%.2f" | format(confidence) }}%
+            </div>
+
+            <div class="bar-wrapper">
+                <div class="bar" style="width: {{ confidence }}%"></div>
+            </div>
+        {% endif %}
     {% endif %}
 
-    <!-- CATEGORY SECTION -->
     <div class="category-box">
         <div class="category-title">
             🍱 Categories this model understands
@@ -197,7 +232,7 @@
         <div class="category-grid">
 
             <div class="chip"><span>🍎</span> apple pie</div>
-            <div class="chip"><span🍰</span> cheesecake</div>
+            <div class="chip"><span>🍰</span> cheesecake</div>
 
             <div class="chip"><span>🍛</span> chicken curry</div>
             <div class="chip"><span>🍟</span> french fries</div>
