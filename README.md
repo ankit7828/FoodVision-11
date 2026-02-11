@@ -1,4 +1,4 @@
-# Food_11_Image_Classifier
+# FoodVision-11
 
 This project builds a deep-learning model that classifies food images into 11 different categories using TensorFlow, Keras, and Transfer Learning with MobileNetV2. The dataset is organized into separate training and testing folders, and the model is trained using data augmentation, frozen base layers, and fine-tuning for better accuracy. The final model predicts the food category from an input image and integrated into a Flask web app for easy user interaction and deployment.
 
